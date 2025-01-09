@@ -70,36 +70,52 @@ class AttributeFilter:
         raise UnsupportedCriterionError
 
     def __repr__(self):
+        """Return machine readible form of class name, operation, and value."""
         return f"{self.__class__.__name__}(op=operator.{self.op.__name__}, value={self.value})"
 
 
 class DateFilter(AttributeFilter):
+    """A filter for the date of close approaches."""
+
     @classmethod
     def get(cls, approach):
+        """Return the date of the close approach."""
         return approach.time.date()
 
 
 class DistFilter(AttributeFilter):
+    """A filter for the nominal approach distance of close approaches."""
+
     @classmethod
     def get(cls, approach):
+        """Return the nominal approach distance of the close approach."""
         return approach.distance
 
 
 class VelFilter(AttributeFilter):
+    """A filter for the velocity of close approaches."""
+
     @classmethod
     def get(cls, approach):
+        """Return the velocity of the close approach."""
         return approach.velocity
 
 
 class DiaFilter(AttributeFilter):
+    """A filter for the diameter of NEOs of close approaches."""
+
     @classmethod
     def get(cls, approach):
+        """Return the diameter of the NEO of the close approach."""
         return approach.neo.diameter
 
 
 class HazardFilter(AttributeFilter):
+    """A filter for whether the NEO of a close approach is potentially hazardous."""
+
     @classmethod
     def get(cls, approach):
+        """Return whether the NEO of the close approach is potentially hazardous."""
         return bool(approach.neo.hazardous)
 
 
@@ -178,12 +194,10 @@ def limit(iterator, n=None):
     :yield: The first (at most) `n` values from the iterator.
     """
     if n == 0 or n is None:
-        return iterator
+        yield from iterator
     else:
-        out = []
         for i, value in enumerate(iterator):
             if i < n:
-                out.append(value)
+                yield value
             else:
                 break
-        return out

@@ -79,6 +79,7 @@ def write_to_json(results, filename):
 
 
 def make_dict_from_approach(close_approach):
+    """Return a dictionary of all the values inside a CloseApproach instance."""
     return {
         "datetime_utc": datetime_to_str(close_approach.time),
         "distance_au": float(close_approach.distance),

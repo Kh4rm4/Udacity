@@ -49,7 +49,7 @@ class NearEarthObject:
         self.approaches = []
 
     def sanitize(self):
-        """returns a dictionary of all the values inside a NearEarthObject instance"""
+        """Return a dictionary of all the values inside a NearEarthObject instance."""
         return {
             "designation": str(self.designation),
             "name": str(self.name) if self.name else "",
@@ -106,7 +106,7 @@ class CloseApproach:
         self.neo = None
 
     def sanitize(self):
-        """returns a dictionary of all the values inside a CloseApproach instance"""
+        """Return a dictionary of all the values inside a CloseApproach instance."""
         return {
             "_designation": str(self._designation),
             "time": datetime_to_str(self.time),
